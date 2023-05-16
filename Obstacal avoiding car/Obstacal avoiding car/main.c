@@ -7,12 +7,15 @@
 
 #include <avr/io.h>
 
+#include "APP/app.h"
 
 int main(void)
 {
+    APP_vidInit();
     /* Replace with your application code */
     while (1) 
     {
+        APP_vidStart();
     }
 }
 

@@ -67,4 +67,45 @@ u8_en_timerErrorsType TIMER_reset (st_timerConfigType* st_config);
 u8_en_timerErrorsType TIMER_setCallBack( void(*a_timerCallBack)(void), u8_en_timerNumberType u8_a_timerNum );
 
 
+
+
+/********************************************************************************************
+ * 								Edit by Bassel Yasser Mahmoud
+*********************************************************************************************/
+
+/*
+* Description : Enable Timer2 interrupt
+* @param    void
+* @return status of the function
+* TIMER_E_OK :the function done successfully
+* TIMER_E_NOT_OK :the function has issues performing the function
+*/
+u8_en_timerErrorsType vidTimer2_OvfIrqEnable(void);
+
+/*
+* Description : Enable Timer2 interrupt
+* @param void
+* @return status of the function
+* TIMER_E_OK :the function done successfully
+* TIMER_E_NOT_OK :the function has issues performing the function
+*/
+u8_en_timerErrorsType vidTimer2_OvfIrqDisable(void);
+
+/*
+* Author    : Bassel Yasser
+* Description : Set_TCNT2 to zero
+* @param void 
+* @return void
+*/
+void MTIMER_vidResetTCNT(void);
+
+/*
+* Author    : Bassel Yasser
+* Description : Call the Call Back function in the application after timer did its job
+* @param    void
+* @return value of TCNT register
+*/
+uint8_t MTIMER_u8GetTCNT(void);
+
+
 #endif	/*	TIMER_H	*/

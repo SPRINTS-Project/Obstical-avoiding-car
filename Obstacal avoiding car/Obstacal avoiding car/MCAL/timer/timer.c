@@ -442,3 +442,48 @@ u8_en_timerErrorsType TIMER_setCallBack( void(*a_timerCallBack)(void), u8_en_tim
 	}
 	return l_ret;
 }
+
+
+
+
+/********************************************************************************************
+ * 								Edit by Bassel Yasser Mahmoud
+*********************************************************************************************/
+
+u8_en_timerErrorsType vidTimer2_OvfIrqEnable(void)
+{
+	u8_en_timerErrorsType errorStatus = TIMER_E_OK;
+
+	SET_BIT(TIFR, 6);
+	SET_BIT(TIMSK, TOIE2);
+//	SET_BIT(SREG, 7);
+
+	return errorStatus;
+}
+
+/*************************************************************************************************************/
+u8_en_timerErrorsType vidTimer2_OvfIrqDisable(void)
+{
+	u8_en_timerErrorsType errorStatus = TIMER_E_OK;
+
+	CLEAR_BIT(TIMSK, TOIE2);
+
+	return errorStatus;
+}
+
+/*************************************************************************************************************/
+void MTIMER_vidResetTCNT(void)
+{
+	TCNT2 = 0;
+}
+
+
+/*************************************************************************************************************/
+uint8_t MTIMER_u8GetTCNT(void)
+{
+	return TCNT2;
+}
+
+/********************************************************************************************
+ * 								END
+*********************************************************************************************/
