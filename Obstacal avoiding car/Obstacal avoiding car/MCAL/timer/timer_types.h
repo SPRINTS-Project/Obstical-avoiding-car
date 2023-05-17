@@ -58,7 +58,7 @@ typedef struct
 {
 	u8_en_timerNumberType u8_timerNum;			/* @ref u8_en_timerNumberType*/
 	u8_en_timerPrescalerType u8_timerClock;		/* @ref u8_en_timerPrescalerType*/
-	uint16_t u16_timer_InitialValue;			/* the pre-loaded value on Timer/Counter Register*/
+	Uint16_t u16_timer_InitialValue;			/* the pre-loaded value on Timer/Counter Register*/
 	u8_en_timerInterruptFeature u8_timer_ovf_int_enable;	/*timer interrupt mask-ability*/
 	timerCallBack callBackFunction;  /*pointer to function that take void and return nothing(void) ,should loaded with call-back function's address*/
 }st_timerConfigType;

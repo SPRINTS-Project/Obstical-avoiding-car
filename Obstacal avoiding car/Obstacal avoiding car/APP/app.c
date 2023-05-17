@@ -53,6 +53,8 @@ void APP_vidInit(void)
     HULTRASONIC_vidInit();
     HULTRASONIC_vidCBF_TIM(HULTRASONIC_vidTimerCBF);
 	HULTRASONIC_vidCBF_INT(HULTRASONIC_vidSigCalc);
+	
+	
 
 }
 

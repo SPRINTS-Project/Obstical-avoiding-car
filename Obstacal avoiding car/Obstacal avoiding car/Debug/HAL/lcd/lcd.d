@@ -1,8 +1,8 @@
-HAL/keypad/keypad.d HAL/keypad/keypad.o: ../HAL/keypad/keypad.c \
- ../HAL/keypad/keypad.h ../HAL/keypad/../../MCAL/dio/dio_types.h \
- ../HAL/keypad/../../MCAL/dio/../../STD_LIBRARIES/STD_TYPES.h \
- ../HAL/keypad/../../MCAL/dio/dio.h \
- ../HAL/keypad/../../MCAL/dio/dio_types.h \
+HAL/lcd/lcd.d HAL/lcd/lcd.o: ../HAL/lcd/lcd.c ../HAL/lcd/lcd.h \
+ ../HAL/lcd/../../STD_LIBRARIES/bit_math.h \
+ ../HAL/lcd/../../STD_LIBRARIES/std_types.h \
+ ../HAL/lcd/../../MCAL/dio/dio.h ../HAL/lcd/../../MCAL/dio/dio_types.h \
+ ../HAL/lcd/../../MCAL/dio/../../STD_LIBRARIES/STD_TYPES.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -10,15 +10,17 @@ HAL/keypad/keypad.d HAL/keypad/keypad.o: ../HAL/keypad/keypad.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
-../HAL/keypad/keypad.h:
+../HAL/lcd/lcd.h:
 
-../HAL/keypad/../../MCAL/dio/dio_types.h:
+../HAL/lcd/../../STD_LIBRARIES/bit_math.h:
 
-../HAL/keypad/../../MCAL/dio/../../STD_LIBRARIES/STD_TYPES.h:
+../HAL/lcd/../../STD_LIBRARIES/std_types.h:
 
-../HAL/keypad/../../MCAL/dio/dio.h:
+../HAL/lcd/../../MCAL/dio/dio.h:
 
-../HAL/keypad/../../MCAL/dio/dio_types.h:
+../HAL/lcd/../../MCAL/dio/dio_types.h:
+
+../HAL/lcd/../../MCAL/dio/../../STD_LIBRARIES/STD_TYPES.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 

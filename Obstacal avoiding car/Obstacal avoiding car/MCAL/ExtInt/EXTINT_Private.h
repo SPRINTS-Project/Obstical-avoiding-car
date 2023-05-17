@@ -8,12 +8,12 @@
 #ifndef MCAL_EXTINT_EXTINT_PRIVATE_H_
 #define MCAL_EXTINT_EXTINT_PRIVATE_H_
 
-#define MCUCR_REG	(*(volatile Uint8_t*)(0x55))
-#define MCUCSR_REG	(*(volatile Uint8_t*)(0x54))
-#define GICR_REG	(*(volatile Uint8_t*)(0x5B))
-#define GIFR_REG	(*(volatile Uint8_t*)(0x5A))
+#define MCUCR_REG	(*(volatile uint8_t*)(0x55))
+#define MCUCSR_REG	(*(volatile uint8_t*)(0x54))
+#define GICR_REG	(*(volatile uint8_t*)(0x5B))
+#define GIFR_REG	(*(volatile uint8_t*)(0x5A))
 
-#define SREG_REG 	(*(volatile Uint8_t*)(0x5F)) // for global interrupt
+#define SREG_REG 	(*(volatile uint8_t*)(0x5F)) // for global interrupt
 
 
 

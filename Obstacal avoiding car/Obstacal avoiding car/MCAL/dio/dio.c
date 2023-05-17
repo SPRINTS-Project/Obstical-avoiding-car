@@ -8,10 +8,6 @@
 #include <avr/io.h>
 #include "dio.h"
 
-
-
-
-
 u8_en_dioErrors DIO_init (en_dioPortsType port, en_dioPinsType pin, u8_en_dioDirType direction)
 {
 	

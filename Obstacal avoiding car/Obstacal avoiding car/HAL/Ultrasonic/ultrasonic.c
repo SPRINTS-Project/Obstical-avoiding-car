@@ -124,7 +124,7 @@ float64_t HULTRASONIC_u8Read(void)
 			 total_time = t_ticks * 62.5e-9 sec
 			 distance = (sound_velocity * total_time)/2 -> (34300 * total_time)/2 -> (17150 * t_ticks * 62.5e-9) -> (t_ticks / 932.95)
 		 */
-		global_f64distance = ((Float64_t)global_u32Ticks) / 932.95;
+		global_f64distance = (float64_t)global_u32Ticks / 932.95;
 
 		/*********************  reset global ovf counts    *******************************************/
 		g_v_u16_ovf = 0;

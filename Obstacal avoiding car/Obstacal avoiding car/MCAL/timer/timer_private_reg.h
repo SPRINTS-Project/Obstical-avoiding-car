@@ -10,7 +10,7 @@
 #ifndef TIMER_PRIVATE_REG_H_
 #define TIMER_PRIVATE_REG_H_
 
-#include "../../STD_LIBRARIES/std_types.h"
+#include "../../STD_LIBRARIES/STD_TYPES.h"
 #include "../../STD_LIBRARIES/bit_math.h"
 
 /****************************************TIMER0_REGISTERS *************************************************/
@@ -103,7 +103,7 @@
 #endif
 
 #ifndef TCNT1
-#define TCNT1   (*(volatile uint16_t*)0x4C)
+#define TCNT1   (*(volatile Uint16_t*)0x4C)
 #endif
 /*TCNT1H  Timer/Counter1 – Counter Register High Byte*/
 #ifndef TCNT1H
