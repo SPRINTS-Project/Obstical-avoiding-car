@@ -91,21 +91,34 @@ u8_en_timerErrorsType vidTimer2_OvfIrqEnable(void);
 */
 u8_en_timerErrorsType vidTimer2_OvfIrqDisable(void);
 
-/*
-* Author    : Bassel Yasser
-* Description : Set_TCNT2 to zero
-* @param void 
-* @return void
-*/
-void MTIMER_vidResetTCNT(void);
 
-/*
-* Author    : Bassel Yasser
-* Description : Call the Call Back function in the application after timer did its job
-* @param    void
-* @return value of TCNT register
-*/
-uint8_t MTIMER_u8GetTCNT(void);
 
+
+
+
+
+/********************************************************************************************
+ * 								Edit by Bassel Yasser Mahmoud
+*********************************************************************************************/
+
+
+// /*
+// * Author    : Bassel Yasser
+// * Description : Set_TCNT2 to zero
+// * @param void 
+// * @return void
+// */
+// void MTIMER_vidResetTCNT(void);
+// 
+// /*
+// * Author    : Bassel Yasser
+// * Description : Call the Call Back function in the application after timer did its job
+// * @param    void
+// * @return value of TCNT register
+// */
+// uint8_t MTIMER_u8GetTCNT(void);
+// 
+// 
+// void MTIMER_vidEnableGlobalInterrupt(void);
 
 #endif	/*	TIMER_H	*/

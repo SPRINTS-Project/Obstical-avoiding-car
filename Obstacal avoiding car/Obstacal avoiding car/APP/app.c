@@ -7,7 +7,7 @@
 #include "../HAL/keypad/keypad.h"
 #include "../HAL/lcd/lcd.h"
 #include "../HAL/motor/motor.h"
-#include "../HAL/timer_manager/timer_manager.h"
+//#include "../HAL/timer_manager/timer_manager.h"
 #include "../HAL/Ultrasonic/ultrasonic.h"
 #include "app.h"
 #include <util/delay.h>
@@ -49,20 +49,15 @@ const ST_motor_t st_gc_motorConfig[]={
 /************************************************************************************************/
 void APP_vidInit(void)
 {
-    
     HULTRASONIC_vidInit();
     HULTRASONIC_vidCBF_TIM(HULTRASONIC_vidTimerCBF);
 	HULTRASONIC_vidCBF_INT(HULTRASONIC_vidSigCalc);
-	
-	
-
 }
 
 void APP_vidStart(void)
 {
     global_f64Dist = HULTRASONIC_u8Read();
 	_delay_ms(15);
-
 }
 /************************************************************************************************/
 /*									END                 										*/

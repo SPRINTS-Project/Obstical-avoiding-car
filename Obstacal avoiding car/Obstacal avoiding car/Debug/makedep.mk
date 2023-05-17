@@ -30,3 +30,5 @@ MCAL\ExtInt\EXTINT_Source.c
 
 MCAL\timer\timer.c
 
+MCAL\timer\timer2_Source.c
+

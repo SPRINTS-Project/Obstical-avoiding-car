@@ -37,16 +37,16 @@ ISR(TIMER1_OVF)
 	}
 }
 
-ISR(TIMER2_OVF)
-{
-	if(sg_Timer2_callBackPtr != NULL)
-	{
-		//The timer2 overflow  occurred (must be cleared in software) 
-		CLEAR_BIT(TIFR,TOV2);
-		//Call the Call Back function in the upper layer after the timer overflow
-		(sg_Timer2_callBackPtr)();
-	}
-}
+// ISR(TIMER2_OVF)
+// {
+// 	if(sg_Timer2_callBackPtr != NULL)
+// 	{
+// 		//The timer2 overflow  occurred (must be cleared in software) 
+// 		SET_BIT(TIFR,TOV2);
+// 		//Call the Call Back function in the upper layer after the timer overflow
+// 		(sg_Timer2_callBackPtr)();
+// 	}
+// }
 
 u8_en_timerErrorsType TIMER_init (st_timerConfigType* st_config)
 {
@@ -141,10 +141,11 @@ u8_en_timerErrorsType TIMER_init (st_timerConfigType* st_config)
 				CLEAR_REG(TCCR2);
 				CLEAR_REG(OCR2);
 				/*Configure initial value in TCNT for Timer2 to start count from it*/
-				TCNT2 = st_config->u16_timer_InitialValue & U8_BIT_REG_MASK;
+				//TCNT2 = st_config->u16_timer_InitialValue & U8_BIT_REG_MASK;
+				TCNT2 = 0;
 				/*Configure the TIMER2 with normal  mode value and enable the interrupt for this mode if interrupt feature activated */
 				/*Make FOC2 to be Active as it is overflow mode(for non-PWM mode)*/
-				SET_BIT(TCCR2,FOC2);
+				//SET_BIT(TCCR2,FOC2);
 				/*Normal Overflow mode*/
 				CLEAR_BIT(TCCR2,WGM20);
 				CLEAR_BIT(TCCR2,WGM21);
@@ -446,43 +447,50 @@ u8_en_timerErrorsType TIMER_setCallBack( void(*a_timerCallBack)(void), u8_en_tim
 
 
 
-/********************************************************************************************
- * 								Edit by Bassel Yasser Mahmoud
-*********************************************************************************************/
-
-u8_en_timerErrorsType vidTimer2_OvfIrqEnable(void)
-{
-	u8_en_timerErrorsType errorStatus = TIMER_E_OK;
-
-	SET_BIT(TIFR, 6);
-	SET_BIT(TIMSK, TOIE2);
-//	SET_BIT(SREG, 7);
-
-	return errorStatus;
-}
-
-/*************************************************************************************************************/
-u8_en_timerErrorsType vidTimer2_OvfIrqDisable(void)
-{
-	u8_en_timerErrorsType errorStatus = TIMER_E_OK;
-
-	CLEAR_BIT(TIMSK, TOIE2);
-
-	return errorStatus;
-}
-
-/*************************************************************************************************************/
-void MTIMER_vidResetTCNT(void)
-{
-	TCNT2 = 0;
-}
-
-
-/*************************************************************************************************************/
-uint8_t MTIMER_u8GetTCNT(void)
-{
-	return TCNT2;
-}
+// /********************************************************************************************
+//  * 								Edit by Bassel Yasser Mahmoud
+// *********************************************************************************************/
+// 
+// u8_en_timerErrorsType vidTimer2_OvfIrqEnable(void)
+// {
+// 	u8_en_timerErrorsType errorStatus = TIMER_E_OK;
+// 
+// 	SET_BIT(TIFR, 6);
+// 	SET_BIT(TIMSK, TOIE2);
+// //	SET_BIT(SREG, 7);
+// 
+// 	return errorStatus;
+// }
+// 
+// /*************************************************************************************************************/
+// u8_en_timerErrorsType vidTimer2_OvfIrqDisable(void)
+// {
+// 	u8_en_timerErrorsType errorStatus = TIMER_E_OK;
+// 
+// 	CLEAR_BIT(TIMSK, TOIE2);
+// 
+// 	return errorStatus;
+// }
+// 
+// /*************************************************************************************************************/
+// void MTIMER_vidResetTCNT(void)
+// {
+// 	TCNT2 = 0;
+// }
+// 
+// 
+// /*************************************************************************************************************/
+// uint8_t MTIMER_u8GetTCNT(void)
+// {
+// 	return TCNT2;
+// }
+// 
+// 
+// void MTIMER_vidEnableGlobalInterrupt(void)
+// {
+// 	
+// 	SET_BIT(SREG,7);
+// }
 
 /********************************************************************************************
  * 								END

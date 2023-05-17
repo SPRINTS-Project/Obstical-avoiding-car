@@ -42,8 +42,9 @@ uint8_t vidExtInt_init(en_int_type_t enIntType, en_sns_ctrl_t enSensControl)
 				default : err_status = E_INT_NOK; break;
 			}
 
-			SET_BIT(GICR_REG, INT0);
 			SET_BIT(GIFR_REG, INTF0);	// to clear flag for Interrupt 0
+			SET_BIT(GICR_REG, INT0);
+			
 		}
 		else if (enIntType == INT_1)
 		{
@@ -75,7 +76,7 @@ uint8_t vidExtInt_init(en_int_type_t enIntType, en_sns_ctrl_t enSensControl)
 		err_status = E_INT_NOK;
 	}
 
-	SET_BIT(SREG_REG, I); // enable global interrupt
+	/*SET_BIT(SREG_REG, I);*/ // enable global interrupt
 //	CLEAR_BIT(SREG_REG, I);
 
 	return err_status;

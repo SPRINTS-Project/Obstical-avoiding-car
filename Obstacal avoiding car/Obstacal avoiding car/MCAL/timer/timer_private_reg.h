@@ -131,6 +131,13 @@
 #endif
 
 
+#ifndef SREG
+/*OCR0 – Output Compare Register*/
+#define SREG   (*(volatile uint8_t*)0x5F)
+#endif
+
+
+
 /*TCCR1A -TIMER_1_CONTROL_REG_A_BITS*/
 /* Bit 7:6 – COM1A1:0: Compare Output Mode for Compare unit A in TCCR1A REG */
 #ifndef COM1A0

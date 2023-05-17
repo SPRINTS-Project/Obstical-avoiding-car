@@ -12,4 +12,6 @@
 #define TRIG_PIN		portb,pin0
 #define SIG_PIN			portd,pin2
 
+#define LED				portd,pin7
+
 #endif /* HAL_ULTRASONIC_ULTRASONIC_CFG_H_ */

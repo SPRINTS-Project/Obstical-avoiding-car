@@ -26,22 +26,29 @@ typedef void(*HULTRASONIC_ptr_func)(void);
 /*
  * Author		: Bassel Yasser Mahmoud
  * function		: HULTRASONIC_vidInit
- * description 	: - Set SIG pin as output and Pull down
- * 				  - Set trig pin as output
- * 				  - Initialize external interrupt
- * 				  - Initialize Timer
+ * description 	: func to write integer number on lcd
+ * 				  Set trig pin as output
+ * 				  Initialize external interrupt
  * Param		: void
  * return		: void
  * */
 void HULTRASONIC_vidInit(void);
 
+/*
+ * Author		: Bassel Yasser Mahmoud
+ * function		: HULTRASONIC_vidTrigger
+ * description 	: Sending pulse
+ * input param 	: void
+ * return		: void
+ * */
+//static void HULTRASONIC_vidTrigger(void);
 
 /*
  * Author		: Bassel Yasser Mahmoud
  * function		: HULTRASONIC_u8Read
  * description 	: Read distance from ultrasonic sensor
  * input param 	: void
- * return		: float64_t (Distance)
+ * return		: Uint8_t (Distance)
  * */
 float64_t HULTRASONIC_u8Read(void);
 
