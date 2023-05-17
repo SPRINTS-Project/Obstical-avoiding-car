@@ -11,7 +11,7 @@
 
 #include "keypad.h"
 #include "../../MCAL/dio/dio.h"
-#define F_CPU 1000000U
+#define F_CPU 8000000U
 #include<util/delay.h>
 static uint8_t keypad[4][3]={{'1','2','3'},{'4','5','6'},{'7','8','9'},{'*','0','#'}};
 extern st_keypadConfigType st_gs_keypadConfig;

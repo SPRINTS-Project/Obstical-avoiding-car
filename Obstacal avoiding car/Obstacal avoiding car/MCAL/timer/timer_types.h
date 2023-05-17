@@ -10,7 +10,7 @@
 #ifndef TIMER_TYPES_H_
 #define TIMER_TYPES_H_
 
-#include <stdint.h>
+//#include <stdint.h>
 #include "../../STD_LIBRARIES/std_types.h"
 #include "../../STD_LIBRARIES/bit_math.h"
 

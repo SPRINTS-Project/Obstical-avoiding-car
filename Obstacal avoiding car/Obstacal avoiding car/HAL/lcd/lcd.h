@@ -10,8 +10,8 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-#include "../../MCAL/dio/dio_types.h"
-#include"../../bit_manipulation.h"
+//#include "../../MCAL/dio/dio.h"
+#include "../../STD_LIBRARIES/bit_math.h"
 
 typedef struct
 {

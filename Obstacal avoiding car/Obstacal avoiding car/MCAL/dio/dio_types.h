@@ -11,7 +11,8 @@
 #define DIO_TYPES_H_
 
 
-#include <stdint.h>
+//#include <stdint.h>
+#include "../../STD_LIBRARIES/STD_TYPES.h"
 
 #define DIO_MAX_PINS	8
 #define DIO_MAX_PORTS	4

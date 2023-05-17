@@ -11,8 +11,8 @@
 #define BUTTON_TYPES_H_
 
 
-#include <stdint.h>
-
+//#include <stdint.h>
+#include "../../STD_LIBRARIES/STD_TYPES.h"
 
 // Create Button Level ENUM
 typedef uint8_t u8_en_btnLevelType;

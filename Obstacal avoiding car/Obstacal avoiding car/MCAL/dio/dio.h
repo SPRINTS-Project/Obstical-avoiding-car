@@ -9,7 +9,7 @@
 
 #ifndef DIO_H_
 #define DIO_H_
-#include <avr/io.h>
+
 #include "dio_types.h"
 
 
