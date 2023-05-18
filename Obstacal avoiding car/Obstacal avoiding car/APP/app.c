@@ -9,6 +9,7 @@
 #include "../HAL/motor/motor.h"
 //#include "../HAL/timer_manager/timer_manager.h"
 #include "../HAL/Ultrasonic/ultrasonic.h"
+#include <avr/io.h>
 #include "app.h"
 #include <util/delay.h>
 
@@ -18,10 +19,13 @@
 extern void HULTRASONIC_vidTimerCBF(void);
 extern void HULTRASONIC_vidSigCalc(void);
 
+extern st_lcdConfigType st_lcdConfig;
 /************************************************************************************************/
 /*									Global variables											*/
 /************************************************************************************************/
 float64_t global_f64Dist;
+
+
 
 
 
@@ -52,12 +56,23 @@ void APP_vidInit(void)
     HULTRASONIC_vidInit();
     HULTRASONIC_vidCBF_TIM(HULTRASONIC_vidTimerCBF);
 	HULTRASONIC_vidCBF_INT(HULTRASONIC_vidSigCalc);
+	
+	(void) LCD_init(&st_lcdConfig);
+	
+/*	DDRA = 0xFF;*/
 }
 
 void APP_vidStart(void)
 {
     global_f64Dist = HULTRASONIC_u8Read();
 	_delay_ms(15);
+	
+	LCD_setCursor(1,1);
+	
+	LCD_WriteInt( (Uint32_t) global_f64Dist );
+	
+	
+/*	PORTA = (uint8_t) global_f64Dist;*/
 }
 /************************************************************************************************/
 /*									END                 										*/

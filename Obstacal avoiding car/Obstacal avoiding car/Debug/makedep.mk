@@ -12,6 +12,8 @@ HAL\keypad\keypad.c
 
 HAL\lcd\lcd.c
 
+HAL\lcd\lcd_cfg.c
+
 HAL\lcd\lcd_test.c
 
 HAL\motor\motor.c
@@ -29,6 +31,4 @@ MCAL\dio\dio.c
 MCAL\ExtInt\EXTINT_Source.c
 
 MCAL\timer\timer.c
-
-MCAL\timer\timer2_Source.c
 

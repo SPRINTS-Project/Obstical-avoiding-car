@@ -9,12 +9,17 @@
 
 
 #include "lcd.h"
+#include "stdlib.h"
+#include <string.h>
 #include "../../MCAL/dio/dio.h"
 #define F_CPU 8000000U
 #include<util/delay.h>
-extern st_lcdConfigType st_gs_lcdConfig;
+st_lcdConfigType st_gs_lcdConfig;
 static uint8_t mode;
 static void ENABLE(void);
+
+
+
 u8_en_lcdErrorsType LCD_init (st_lcdConfigType* st_config)
 {
 	u8_en_lcdErrorsType ret_val=LCD_E_OK;
@@ -24,11 +29,11 @@ u8_en_lcdErrorsType LCD_init (st_lcdConfigType* st_config)
 	switch(st_config->u8_mode)
 	{
 		case LCD_4_BIT_MODE	: 
-		                        LCD_cmd(&st_gs_lcdConfig,0x02);
-		                        LCD_cmd(&st_gs_lcdConfig,0x28);
-		                        LCD_cmd(&st_gs_lcdConfig,0x0C);
-		                        LCD_cmd(&st_gs_lcdConfig,0x06);
-		                        LCD_cmd(&st_gs_lcdConfig,0x01);
+		                        LCD_cmd(st_config,0x02);
+		                        LCD_cmd(st_config,0x28);
+		                        LCD_cmd(st_config,0x0C);
+		                        LCD_cmd(st_config,0x06);
+		                        LCD_cmd(st_config,0x01);
 								ret_val |=DIO_init(st_config->u8_d4Pin[0],st_config->u8_d4Pin[1],STD_OUTPUT);
 								ret_val |=DIO_init(st_config->u8_d5Pin[0],st_config->u8_d5Pin[1],STD_OUTPUT);
 								ret_val |=DIO_init(st_config->u8_d6Pin[0],st_config->u8_d6Pin[1],STD_OUTPUT);
@@ -36,10 +41,10 @@ u8_en_lcdErrorsType LCD_init (st_lcdConfigType* st_config)
 								break;
 								
 	case LCD_8_BIT_MODE	: 
-		                        LCD_cmd(&st_gs_lcdConfig,0x38);
-		                        LCD_cmd(&st_gs_lcdConfig,0x0C);
-		                        LCD_cmd(&st_gs_lcdConfig,0x06);
-		                        LCD_cmd(&st_gs_lcdConfig,0x01);
+		                        LCD_cmd(st_config,0x38);
+		                        LCD_cmd(st_config,0x0C);
+		                        LCD_cmd(st_config,0x06);
+		                        LCD_cmd(st_config,0x01);
 		                        ret_val |=DIO_init(st_config->u8_d0Pin[0],st_config->u8_d0Pin[1],STD_OUTPUT);
 		                        ret_val |=DIO_init(st_config->u8_d1Pin[0],st_config->u8_d1Pin[1],STD_OUTPUT);
 		                        ret_val |=DIO_init(st_config->u8_d2Pin[0],st_config->u8_d2Pin[1],STD_OUTPUT);
@@ -54,6 +59,9 @@ u8_en_lcdErrorsType LCD_init (st_lcdConfigType* st_config)
 								
 	}
 	mode=st_config->u8_mode;
+	
+	/*st_gs_lcdConfig = st_config;*/
+	memcpy(&st_gs_lcdConfig,st_config, strlen(st_config)+1);
 	return ret_val;
 }
 u8_en_lcdErrorsType LCD_clear (void)
@@ -183,4 +191,13 @@ void ENABLE(void)
 	DIO_writePIN(st_gs_lcdConfig.u8_Epin[0],st_gs_lcdConfig.u8_Epin[1],STD_LOW);
 	//_delay_us(1);
 
+}
+
+
+#define INDEX  4
+void LCD_WriteInt(Uint32_t number)
+{
+	uint8_t STR[INDEX];
+	itoa(number, STR, 10);
+	LCD_writeString(STR);
 }

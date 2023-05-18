@@ -178,6 +178,12 @@
     <Compile Include="HAL\lcd\lcd.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\lcd\lcd_cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\lcd\lcd_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\lcd\lcd_test.c">
       <SubType>compile</SubType>
     </Compile>
@@ -239,9 +245,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\timer\timer_private_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\timer\timer2_Source.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\timer\timer_types.h">
