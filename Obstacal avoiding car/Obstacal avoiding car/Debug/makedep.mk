@@ -6,6 +6,8 @@ APP\app.c
 
 HAL\button\button.c
 
+HAL\hextInt\HExtInt.c
+
 HAL\hlcd\hlcd_Configure.c
 
 HAL\hlcd\hlcd_Source.c

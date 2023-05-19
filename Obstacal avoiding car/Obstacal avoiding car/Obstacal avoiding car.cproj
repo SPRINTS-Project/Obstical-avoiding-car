@@ -163,6 +163,15 @@
     <Compile Include="HAL\button\button_types.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\hextInt\HExtInt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\hextInt\HExtInt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\hextInt\hextInt_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\hlcd\hlcd_Configure.c">
       <SubType>compile</SubType>
     </Compile>
@@ -259,6 +268,7 @@
     <Folder Include="HAL\keypad\" />
     <Folder Include="HAL\motor\" />
     <Folder Include="HAL\hlcd" />
+    <Folder Include="HAL\hextInt" />
     <Folder Include="HAL\timer_manager\" />
     <Folder Include="HAL\Ultrasonic\" />
     <Folder Include="MCAL" />

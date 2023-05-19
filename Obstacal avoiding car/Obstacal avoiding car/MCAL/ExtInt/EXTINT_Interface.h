@@ -54,6 +54,9 @@ typedef void(*ptr_func)(void);
  * */
 uint8_t vidExtInt_init(en_int_type_t, en_sns_ctrl_t);
 
+
+void MEXTINT_vidCallBackFuncInt0(ptr_func funcCopy);
+
 /*
  * Author		: Bassel Yasser Mahmoud
  * function		: vidCallBackFunc

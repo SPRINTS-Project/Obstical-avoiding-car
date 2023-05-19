@@ -11,6 +11,7 @@
 /************************************************************************************************/
 /*									USER_DEFINED TYPES											*/
 /************************************************************************************************/
+ptr_func callBackFuncInt0 = NULL;
 ptr_func callBack = NULL;
 ptr_func callBackFunc = NULL;
 
@@ -42,8 +43,8 @@ uint8_t vidExtInt_init(en_int_type_t enIntType, en_sns_ctrl_t enSensControl)
 				default : err_status = E_INT_NOK; break;
 			}
 
-			SET_BIT(GIFR_REG, INTF0);	// to clear flag for Interrupt 0
-			SET_BIT(GICR_REG, INT0);
+// 			SET_BIT(GIFR_REG, INTF0);	// to clear flag for Interrupt 0
+// 			SET_BIT(GICR_REG, INT0);
 			
 		}
 		else if (enIntType == INT_1)
@@ -84,6 +85,12 @@ uint8_t vidExtInt_init(en_int_type_t enIntType, en_sns_ctrl_t enSensControl)
 
 
 
+void MEXTINT_vidCallBackFuncInt0(ptr_func funcCopy)
+{
+	
+	callBackFuncInt0 = funcCopy;
+}
+
 /*
  * Author		: Bassel Yasser Mahmoud
  * function		: vidCallBackFunc
@@ -110,6 +117,8 @@ void MEXTINT_vidCallBackFuncInt1(ptr_func funcCopy)
 	callBackFunc = funcCopy;
 
 }
+
+
 
 /*
  * Author		: Bassel Yasser Mahmoud
@@ -145,22 +154,22 @@ void MEXTINT_vidDisableInterrupt(void)
  * */
 void MEXTINT_vidEnableInterrupt(void)
 {
-	SET_BIT(GIFR_REG, INTF1);
+	SET_BIT(GIFR_REG, INTF0);
 	SET_BIT(GICR_REG, INT0);
 }
 
 /************************************************************************************************/
 /*									ISR															*/
 /************************************************************************************************/
-// ISR(INT0_vect)
-// {
-// 	callBack();
-// }
-// 
-// ISR(INT1_vect)
-// {
-// 	callBackFunc();
-// }
+ISR(INT0_vect)
+{
+	callBackFuncInt0();
+}
+
+ISR(INT1_vect)
+{
+	callBackFunc();
+}
 
 ISR(INT2_vect)
 {

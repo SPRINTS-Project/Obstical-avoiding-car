@@ -34,6 +34,7 @@
 #define HLCD_CURSOR_HOME					0x02
 #define HLCD_ENTRY_MODE_CURSOR_INCREMENT	0x06
 #define HLCD_DISPLAY_ON_CURSOR_ON_NO_BLINK	0x0E
+#define HLCD_DISPLAY_ON_CURSOR_OFF_NO_BLINK	0x0C
 #define HLCD_4_BIT_MODE_SELECTION			0x28
 #define HLCD_8_BIT_MODE_SELECTION			0x38
 #define HLCD_DISPLAY_SHIFT_LEFT				0x18
@@ -96,7 +97,7 @@ u8_en_lcdErrorsType HLCD_vidInit(void)
 	errorStatus |= HLCD_vidWritecmd(HLCD_ENTRY_MODE_CURSOR_INCREMENT);
 	_delay_ms(1);
 
-	errorStatus |= HLCD_vidWritecmd(HLCD_DISPLAY_ON_CURSOR_ON_NO_BLINK);
+	errorStatus |= HLCD_vidWritecmd(HLCD_DISPLAY_ON_CURSOR_OFF_NO_BLINK);
 	_delay_ms(1);
 	
 	return errorStatus;
