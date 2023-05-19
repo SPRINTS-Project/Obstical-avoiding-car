@@ -187,13 +187,13 @@ void APP_updateDirection(void)
 {
 	TIMER_Manager_start (&st_timer1Config);
 	HExtInt0_enIntEnable();
-// 	while(u8_g_OneSecTicks <= 5)
-// 	{
-// 		HLCD_gotoXY(0,0);
-// 		HLCD_WriteString( (uint8_t*) "Set Def. Rot.");
-// 		HLCD_gotoXY(1,0);
-// 		HLCD_WriteString(g_u8_motorDir);
-// 	}
+	while(u8_g_OneSecTicks <= 5)
+	{
+		HLCD_gotoXY(0,0);
+		HLCD_WriteString( (uint8_t*) "Set Def. Rot.");
+		HLCD_gotoXY(1,0);
+		HLCD_WriteString(g_u8_motorDir);
+	}
 	PORTA = u8_g_OneSecTicks;
 	HLCD_ClrDisplay();
 	(void) TIMER_Manager_stop (st_timer1Config.u8_timerNum);
