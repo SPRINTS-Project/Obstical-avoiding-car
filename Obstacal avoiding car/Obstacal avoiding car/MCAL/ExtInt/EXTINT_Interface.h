@@ -104,4 +104,8 @@ void MEXTINT_vidDisableInterrupt(void);
 void MEXTINT_vidEnableInterrupt(void);
 
 
+
+void MEXTINT2_vidDisableInterrupt(void);
+void MEXTINT2_vidEnableInterrupt(void);
+
 #endif /* 04_MCAL_EXTINT_EXTINT_INTERFACE_H_ */

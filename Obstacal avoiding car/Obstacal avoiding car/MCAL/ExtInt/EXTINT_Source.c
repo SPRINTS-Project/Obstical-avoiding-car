@@ -68,8 +68,8 @@ uint8_t vidExtInt_init(en_int_type_t enIntType, en_sns_ctrl_t enSensControl)
 				case RISE_EDGE 	: SET_BIT(MCUCSR_REG, ISC2);  break;
 				default : err_status = E_INT_NOK; break;
 			}
-			SET_BIT(GICR_REG, INT2);
-			SET_BIT(GIFR_REG, INTF2);  // to clear flag for Interrupt 2
+// 			SET_BIT(GICR_REG, INT2);
+// 			SET_BIT(GIFR_REG, INTF2);  // to clear flag for Interrupt 2
 		}
 	}
 	else
@@ -156,6 +156,25 @@ void MEXTINT_vidEnableInterrupt(void)
 {
 	SET_BIT(GIFR_REG, INTF0);
 	SET_BIT(GICR_REG, INT0);
+}
+
+void MEXTINT2_vidDisableInterrupt(void)
+{
+	CLEAR_BIT(GICR_REG, INT2);
+}
+
+
+/*
+ * Author		: Bassel Yasser Mahmoud
+ * function		: MEXTINT_vidEnableInterrupt
+ * description 	: ENABLE extint
+ * input param 	: void
+ * return		: void
+ * */
+void MEXTINT2_vidEnableInterrupt(void)
+{
+		SET_BIT(GICR_REG, INT2);
+		SET_BIT(GIFR_REG, INTF2);
 }
 
 /************************************************************************************************/

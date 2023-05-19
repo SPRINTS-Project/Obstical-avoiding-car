@@ -112,10 +112,19 @@ void HULTRASONIC_vidInit(void)
 
 	(void) enuTimer2_init (OVF_MODE);
 	(void) u8Timer2_setPrescallar(TIMER_PRE_1);
+}
+
+void HULTRASONIC_vidInterruptEnable(void)
+{
 	(void) vidTimer2_OvfIrqEnable();
+	MEXTINT2_vidEnableInterrupt();
+	MTIMER_vidEnableGlobalInterrupt();
+}
 
-	 MTIMER_vidEnableGlobalInterrupt();
-
+void HULTRASONIC_vidInterruptDisable(void)
+{
+	(void) vidTimer2_OvfIrqDisable();
+	MEXTINT2_vidDisableInterrupt();
 }
 
 /*

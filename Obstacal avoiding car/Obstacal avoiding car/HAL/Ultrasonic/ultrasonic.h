@@ -72,7 +72,8 @@ void HULTRASONIC_vidCBF_TIM(HULTRASONIC_ptr_func TIMER_ptrFunction2);
 void HULTRASONIC_vidCBF_INT(HULTRASONIC_ptr_func EXTINT_ptrFunction2);
 
 
-
+void HULTRASONIC_vidInterruptEnable(void);
+void HULTRASONIC_vidInterruptDisable(void);
 
 #endif /* HAL_ULTRASONIC_ULTRASONIC_H_ */
 /************************************************************************************************/

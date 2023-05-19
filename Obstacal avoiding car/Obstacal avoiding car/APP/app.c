@@ -93,7 +93,7 @@ const ST_motor_t st_gc_motorConfig[]={
 /************************************************************************************************/
 void APP_vidInit(void)
 {
-    HULTRASONIC_vidInit();
+/*    HULTRASONIC_vidInit();*/
 	(void) HLCD_vidInit();
 	(void) KEYPAD_init(&st_gs_keypadConfig);
 	(void) HExtInt_enInit(INT_0, RISE_EDGE);
@@ -132,8 +132,8 @@ void APP_vidStart(void)
 	 
 	  if (en_motorSel == EN_MOTOR_START)
 	  {
-		global_f64Dist = HULTRASONIC_u8Read();
-		_delay_ms(15);
+// 		global_f64Dist = HULTRASONIC_u8Read();
+// 		_delay_ms(15);
 		if (flag3 == 0) {HLCD_ClrDisplay();  flag1 = 0; flag2 = 0; flag3 = 1; }		
 		APP_updateDirection();
 		
