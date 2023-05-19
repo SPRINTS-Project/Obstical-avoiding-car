@@ -35,8 +35,8 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../HAL/button/ \
 ../HAL/keypad/ \
-../HAL/lcd/ \
 ../HAL/motor/ \
+../HAL/hlcd \
 ../HAL/timer_manager/ \
 ../HAL/Ultrasonic/ \
 ../MCAL \
@@ -52,11 +52,10 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../APP/app.c \
 ../HAL/button/button.c \
+../HAL/hlcd/hlcd_Configure.c \
+../HAL/hlcd/hlcd_Source.c \
 ../HAL/keypad/keypad\ and\ LCD\ intergration.c \
 ../HAL/keypad/keypad.c \
-../HAL/lcd/lcd.c \
-../HAL/lcd/lcd_cfg.c \
-../HAL/lcd/lcd_test.c \
 ../HAL/motor/motor.c \
 ../HAL/timer_manager/timer_manager.c \
 ../HAL/Ultrasonic/ultrasonic.c \
@@ -76,11 +75,10 @@ ASM_SRCS +=
 OBJS +=  \
 APP/app.o \
 HAL/button/button.o \
+HAL/hlcd/hlcd_Configure.o \
+HAL/hlcd/hlcd_Source.o \
 HAL/keypad/keypad\ and\ LCD\ intergration.o \
 HAL/keypad/keypad.o \
-HAL/lcd/lcd.o \
-HAL/lcd/lcd_cfg.o \
-HAL/lcd/lcd_test.o \
 HAL/motor/motor.o \
 HAL/timer_manager/timer_manager.o \
 HAL/Ultrasonic/ultrasonic.o \
@@ -93,11 +91,10 @@ MCAL/timer/timer.o
 OBJS_AS_ARGS +=  \
 APP/app.o \
 HAL/button/button.o \
+HAL/hlcd/hlcd_Configure.o \
+HAL/hlcd/hlcd_Source.o \
 "HAL/keypad/keypad and LCD intergration.o" \
 HAL/keypad/keypad.o \
-HAL/lcd/lcd.o \
-HAL/lcd/lcd_cfg.o \
-HAL/lcd/lcd_test.o \
 HAL/motor/motor.o \
 HAL/timer_manager/timer_manager.o \
 HAL/Ultrasonic/ultrasonic.o \
@@ -110,11 +107,10 @@ MCAL/timer/timer.o
 C_DEPS +=  \
 APP/app.d \
 HAL/button/button.d \
+HAL/hlcd/hlcd_Configure.d \
+HAL/hlcd/hlcd_Source.d \
 HAL/keypad/keypad\ and\ LCD\ intergration.d \
 HAL/keypad/keypad.d \
-HAL/lcd/lcd.d \
-HAL/lcd/lcd_cfg.d \
-HAL/lcd/lcd_test.d \
 HAL/motor/motor.d \
 HAL/timer_manager/timer_manager.d \
 HAL/Ultrasonic/ultrasonic.d \
@@ -127,11 +123,10 @@ MCAL/timer/timer.d
 C_DEPS_AS_ARGS +=  \
 APP/app.d \
 HAL/button/button.d \
+HAL/hlcd/hlcd_Configure.d \
+HAL/hlcd/hlcd_Source.d \
 "HAL/keypad/keypad and LCD intergration.d" \
 HAL/keypad/keypad.d \
-HAL/lcd/lcd.d \
-HAL/lcd/lcd_cfg.d \
-HAL/lcd/lcd_test.d \
 HAL/motor/motor.d \
 HAL/timer_manager/timer_manager.d \
 HAL/Ultrasonic/ultrasonic.d \
@@ -169,6 +164,20 @@ HAL/button/button.o: ../HAL/button/button.c
 	@echo Finished building: $<
 	
 
+HAL/hlcd/hlcd_Configure.o: ../HAL/hlcd/hlcd_Configure.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+HAL/hlcd/hlcd_Source.o: ../HAL/hlcd/hlcd_Source.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 HAL/keypad/keypad\ and\ LCD\ intergration.o: ../HAL/keypad/keypad\ and\ LCD\ intergration.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -177,27 +186,6 @@ HAL/keypad/keypad\ and\ LCD\ intergration.o: ../HAL/keypad/keypad\ and\ LCD\ int
 	
 
 HAL/keypad/keypad.o: ../HAL/keypad/keypad.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-HAL/lcd/lcd.o: ../HAL/lcd/lcd.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-HAL/lcd/lcd_cfg.o: ../HAL/lcd/lcd_cfg.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-HAL/lcd/lcd_test.o: ../HAL/lcd/lcd_test.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

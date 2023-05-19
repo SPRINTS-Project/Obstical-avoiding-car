@@ -6,15 +6,13 @@ APP\app.c
 
 HAL\button\button.c
 
+HAL\hlcd\hlcd_Configure.c
+
+HAL\hlcd\hlcd_Source.c
+
 HAL\keypad\keypad and LCD intergration.c
 
 HAL\keypad\keypad.c
-
-HAL\lcd\lcd.c
-
-HAL\lcd\lcd_cfg.c
-
-HAL\lcd\lcd_test.c
 
 HAL\motor\motor.c
 

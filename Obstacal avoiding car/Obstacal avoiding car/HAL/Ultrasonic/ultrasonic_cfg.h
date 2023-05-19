@@ -9,8 +9,8 @@
 #define HAL_ULTRASONIC_ULTRASONIC_CFG_H_
 
 
-#define TRIG_PIN		portb,pin0
-#define SIG_PIN			portd,pin2
+#define TRIG_PIN		portb,pin3
+#define SIG_PIN			portb,pin2
 
 #define LED				portd,pin7
 

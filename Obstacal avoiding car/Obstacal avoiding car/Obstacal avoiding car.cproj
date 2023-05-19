@@ -163,6 +163,18 @@
     <Compile Include="HAL\button\button_types.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\hlcd\hlcd_Configure.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\hlcd\hlcd_Configure.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\hlcd\hlcd_Interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\hlcd\hlcd_Source.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\keypad\keypad and LCD intergration.c">
       <SubType>compile</SubType>
     </Compile>
@@ -170,21 +182,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\keypad\keypad.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\lcd\lcd.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\lcd\lcd.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\lcd\lcd_cfg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\lcd\lcd_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\lcd\lcd_test.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\motor\motor.c">
@@ -260,8 +257,8 @@
   <ItemGroup>
     <Folder Include="HAL\button\" />
     <Folder Include="HAL\keypad\" />
-    <Folder Include="HAL\lcd\" />
     <Folder Include="HAL\motor\" />
+    <Folder Include="HAL\hlcd" />
     <Folder Include="HAL\timer_manager\" />
     <Folder Include="HAL\Ultrasonic\" />
     <Folder Include="MCAL" />

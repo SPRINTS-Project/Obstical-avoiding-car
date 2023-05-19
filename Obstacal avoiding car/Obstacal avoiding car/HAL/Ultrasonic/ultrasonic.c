@@ -59,7 +59,7 @@ void HULTRASONIC_vidSigCalc(void)
 	if (g_v_u8_flag == 0)
 	{
 		MTIMER_vidResetTCNT();
-		(void) vidExtInt_init(INT_0 , FALL_EDGE);
+		(void) vidExtInt_init(INT_2 , FALL_EDGE);
 		g_v_u8_flag = 1;
 		g_v_u16_ovfCounts = 0;
 		(void) vidTimer2_start();	
@@ -84,7 +84,7 @@ void HULTRASONIC_vidSigCalc(void)
 		g_v_u16_ovf = 0; g_v_u16_ovfCounts = 0;  g_v_u8_flag = 0;
 
 		/*********************  Set EXTINT sense Rising Edge    *******************************************/
-		(void) vidExtInt_init(INT_0 , RISE_EDGE);
+		(void) vidExtInt_init(INT_2 , RISE_EDGE);
 
 	}
 }
@@ -108,7 +108,7 @@ void HULTRASONIC_vidInit(void)
 	(void) DIO_init(SIG_PIN, STD_INPUT);
 	(void) DIO_writePIN(SIG_PIN, STD_LOW);
 
-	(void) vidExtInt_init(INT_0 , RISE_EDGE);
+	(void) vidExtInt_init(INT_2 , RISE_EDGE);
 
 	(void) enuTimer2_init (OVF_MODE);
 	(void) u8Timer2_setPrescallar(TIMER_PRE_1);
