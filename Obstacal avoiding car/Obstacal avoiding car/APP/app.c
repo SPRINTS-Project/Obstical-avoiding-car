@@ -102,7 +102,7 @@ void APP_vidInit(void)
 	HULTRASONIC_vidCBF_TIM(HULTRASONIC_vidTimerCBF);
 	HULTRASONIC_vidCBF_INT(HULTRASONIC_vidSigCalc);
 	(void) HExtInt_enCBFInt0(BUTTON_vidChangeDir);
-	
+	//sei();
 	DDRA = 0xFF;
 }
 
@@ -132,8 +132,13 @@ void APP_vidStart(void)
 	 
 	  if (en_motorSel == EN_MOTOR_START)
 	  {
+<<<<<<< HEAD
 // 		global_f64Dist = HULTRASONIC_u8Read();
 // 		_delay_ms(15);
+=======
+		//global_f64Dist = HULTRASONIC_u8Read();
+		//_delay_ms(15);
+>>>>>>> main
 		if (flag3 == 0) {HLCD_ClrDisplay();  flag1 = 0; flag2 = 0; flag3 = 1; }		
 		APP_updateDirection();
 		
@@ -181,10 +186,12 @@ void BUTTON_vidChangeDir(void)
 void TIMER1_callBackFunc(void)
 {
 	u8_g_OneSecTicks++;
+	TIMER_Manager_reset(&st_timer1Config);
 }
 
 void APP_updateDirection(void)
 {
+	
 	TIMER_Manager_start (&st_timer1Config);
 	HExtInt0_enIntEnable();
 	while(u8_g_OneSecTicks <= 5)
@@ -193,8 +200,9 @@ void APP_updateDirection(void)
 		HLCD_WriteString( (uint8_t*) "Set Def. Rot.");
 		HLCD_gotoXY(1,0);
 		HLCD_WriteString(g_u8_motorDir);
+		//PORTA = u8_g_OneSecTicks;
 	}
-	PORTA = u8_g_OneSecTicks;
+	
 	HLCD_ClrDisplay();
 	(void) TIMER_Manager_stop (st_timer1Config.u8_timerNum);
 	HExtInt0_enIntDisable();
