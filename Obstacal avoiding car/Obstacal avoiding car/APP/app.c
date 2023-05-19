@@ -93,7 +93,8 @@ const ST_motor_t st_gc_motorConfig[]={
 /************************************************************************************************/
 void APP_vidInit(void)
 {
-/*    HULTRASONIC_vidInit();*/
+    HULTRASONIC_vidInit();
+	HULTRASONIC_vidInterruptEnable();
 	(void) HLCD_vidInit();
 	(void) KEYPAD_init(&st_gs_keypadConfig);
 	(void) HExtInt_enInit(INT_0, RISE_EDGE);
@@ -102,7 +103,9 @@ void APP_vidInit(void)
 	HULTRASONIC_vidCBF_TIM(HULTRASONIC_vidTimerCBF);
 	HULTRASONIC_vidCBF_INT(HULTRASONIC_vidSigCalc);
 	(void) HExtInt_enCBFInt0(BUTTON_vidChangeDir);
-	//sei();
+	
+	HExtInt0_enIntEnable();
+/*	sei();*/
 	DDRA = 0xFF;
 }
 
@@ -132,16 +135,12 @@ void APP_vidStart(void)
 	 
 	  if (en_motorSel == EN_MOTOR_START)
 	  {
-<<<<<<< HEAD
-// 		global_f64Dist = HULTRASONIC_u8Read();
-// 		_delay_ms(15);
-=======
-		//global_f64Dist = HULTRASONIC_u8Read();
-		//_delay_ms(15);
->>>>>>> main
+		  global_f64Dist = HULTRASONIC_u8Read();
+		  _delay_ms(15);
 		if (flag3 == 0) {HLCD_ClrDisplay();  flag1 = 0; flag2 = 0; flag3 = 1; }		
-		APP_updateDirection();
+/*		APP_updateDirection();*/
 		
+
 		
 		
 		
@@ -191,7 +190,7 @@ void TIMER1_callBackFunc(void)
 
 void APP_updateDirection(void)
 {
-	
+	HULTRASONIC_vidInterruptDisable();
 	TIMER_Manager_start (&st_timer1Config);
 	HExtInt0_enIntEnable();
 	while(u8_g_OneSecTicks <= 5)
@@ -206,7 +205,7 @@ void APP_updateDirection(void)
 	HLCD_ClrDisplay();
 	(void) TIMER_Manager_stop (st_timer1Config.u8_timerNum);
 	HExtInt0_enIntDisable();
-	
+	HULTRASONIC_vidInterruptEnable();
 }
 /************************************************************************************************/
 /*									END                 										*/
