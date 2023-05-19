@@ -10,6 +10,16 @@ typedef enum
 	
 	}en_motorSel_t;
 
+typedef enum
+{
+	EN_UPDATE_DIR = 0,
+	UPDATE_OBISTICAL_STATE,
+	NO_OBISTICALS,
+	OBISTICAL_70_30,
+	OBISTICAL_30_20,
+	OBISTICAL_LESS_20
+	}en_start_states_t;
+
 /************************************************************************************************/
 /*									Function Prototypes     									*/
 /************************************************************************************************/

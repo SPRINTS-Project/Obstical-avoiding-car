@@ -18,6 +18,8 @@ HAL\keypad\keypad.c
 
 HAL\motor\motor.c
 
+HAL\pwm\pwm.c
+
 HAL\timer_manager\timer_manager.c
 
 HAL\Ultrasonic\ultrasonic.c

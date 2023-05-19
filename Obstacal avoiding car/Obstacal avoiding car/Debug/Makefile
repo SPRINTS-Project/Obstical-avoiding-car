@@ -38,6 +38,7 @@ SUBDIRS :=  \
 ../HAL/motor/ \
 ../HAL/hlcd \
 ../HAL/hextInt \
+../HAL/pwm \
 ../HAL/timer_manager/ \
 ../HAL/Ultrasonic/ \
 ../MCAL \
@@ -59,6 +60,7 @@ C_SRCS +=  \
 ../HAL/keypad/keypad\ and\ LCD\ intergration.c \
 ../HAL/keypad/keypad.c \
 ../HAL/motor/motor.c \
+../HAL/pwm/pwm.c \
 ../HAL/timer_manager/timer_manager.c \
 ../HAL/Ultrasonic/ultrasonic.c \
 ../HAL/Ultrasonic/ultrasonic_cfg.c \
@@ -83,6 +85,7 @@ HAL/hlcd/hlcd_Source.o \
 HAL/keypad/keypad\ and\ LCD\ intergration.o \
 HAL/keypad/keypad.o \
 HAL/motor/motor.o \
+HAL/pwm/pwm.o \
 HAL/timer_manager/timer_manager.o \
 HAL/Ultrasonic/ultrasonic.o \
 HAL/Ultrasonic/ultrasonic_cfg.o \
@@ -100,6 +103,7 @@ HAL/hlcd/hlcd_Source.o \
 "HAL/keypad/keypad and LCD intergration.o" \
 HAL/keypad/keypad.o \
 HAL/motor/motor.o \
+HAL/pwm/pwm.o \
 HAL/timer_manager/timer_manager.o \
 HAL/Ultrasonic/ultrasonic.o \
 HAL/Ultrasonic/ultrasonic_cfg.o \
@@ -117,6 +121,7 @@ HAL/hlcd/hlcd_Source.d \
 HAL/keypad/keypad\ and\ LCD\ intergration.d \
 HAL/keypad/keypad.d \
 HAL/motor/motor.d \
+HAL/pwm/pwm.d \
 HAL/timer_manager/timer_manager.d \
 HAL/Ultrasonic/ultrasonic.d \
 HAL/Ultrasonic/ultrasonic_cfg.d \
@@ -134,6 +139,7 @@ HAL/hlcd/hlcd_Source.d \
 "HAL/keypad/keypad and LCD intergration.d" \
 HAL/keypad/keypad.d \
 HAL/motor/motor.d \
+HAL/pwm/pwm.d \
 HAL/timer_manager/timer_manager.d \
 HAL/Ultrasonic/ultrasonic.d \
 HAL/Ultrasonic/ultrasonic_cfg.d \
@@ -206,6 +212,13 @@ HAL/keypad/keypad.o: ../HAL/keypad/keypad.c
 	
 
 HAL/motor/motor.o: ../HAL/motor/motor.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+HAL/pwm/pwm.o: ../HAL/pwm/pwm.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -15,7 +15,8 @@ APP/app.d APP/app.o: ../APP/app.c ../APP/../STD_LIBRARIES/STD_TYPES.h \
  ../APP/../HAL/timer_manager/../../MCAL/timer/../../STD_LIBRARIES/std_types.h \
  ../APP/../HAL/timer_manager/../../MCAL/timer/../../STD_LIBRARIES/bit_math.h \
  ../APP/../HAL/timer_manager/../../MCAL/timer/../../STD_LIBRARIES/std_types.h \
- ../APP/../HAL/Ultrasonic/ultrasonic.h \
+ ../APP/../HAL/Ultrasonic/ultrasonic.h ../APP/../HAL/pwm/pwm.h \
+ ../APP/../HAL/pwm/../../STD_LIBRARIES/STD_TYPES.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -72,6 +73,10 @@ APP/app.d APP/app.o: ../APP/app.c ../APP/../STD_LIBRARIES/STD_TYPES.h \
 ../APP/../HAL/timer_manager/../../MCAL/timer/../../STD_LIBRARIES/std_types.h:
 
 ../APP/../HAL/Ultrasonic/ultrasonic.h:
+
+../APP/../HAL/pwm/pwm.h:
+
+../APP/../HAL/pwm/../../STD_LIBRARIES/STD_TYPES.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
