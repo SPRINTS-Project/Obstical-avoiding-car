@@ -186,6 +186,7 @@ void TIMER1_callBackFunc(void)
 
 void APP_updateDirection(void)
 {
+	
 	TIMER_Manager_start (&st_timer1Config);
 	HExtInt0_enIntEnable();
 	while(u8_g_OneSecTicks <= 5)
