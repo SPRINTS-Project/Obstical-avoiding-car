@@ -78,7 +78,7 @@ void HULTRASONIC_vidSigCalc(void)
 			 total_time = t_ticks * 62.5e-9 sec
 			 distance = (sound_velocity * total_time)/2 -> (343000 * total_time)/2 -> (17150 * t_ticks * 62.5e-9) -> (t_ticks / 932.95)
 		 */		
-		global_f64distance = ((float64_t)global_u32Ticks / 932.95)-2.0;
+		global_f64distance = (float64_t)global_u32Ticks / 932.95;
 
 		/*********************  reset global ovf counts and flag    *******************************************/
 		g_v_u16_ovf = 0; g_v_u16_ovfCounts = 0;  g_v_u8_flag = 0;

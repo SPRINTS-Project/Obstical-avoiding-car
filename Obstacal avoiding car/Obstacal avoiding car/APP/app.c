@@ -35,9 +35,10 @@ float64_t global_f64Dist;
 uint8_t u8KeyRead, flag1 = 0, flag2 = 0, flag3 = 0;
 uint8_t u8_g_OneSecTicks = 0;
 uint8_t u8_g_dirStateCounter = 0;
-//uint8_t* g_u8_motorDir = "Right";
+uint8_t* g_u8_motorDir = "Right";
 en_motorSel_t en_motorSel = EN_MOTOR_IDLE;
 en_start_states_t en_start_state = EN_UPDATE_DIR;
+en_Dist_states_t en_Dist_states = OBSTACLE_IDLE;
 
 
 st_keypadConfigType st_gs_keypadConfig = {
@@ -108,15 +109,14 @@ void APP_vidInit(void)
 	HULTRASONIC_vidCBF_INT(HULTRASONIC_vidSigCalc);
 	(void) HExtInt_enCBFInt0(BUTTON_vidChangeDir);
 	
-	HExtInt0_enIntEnable();
 /*	sei();*/
 	DDRA = 0xFF;
 }
 
 void APP_vidStart(void)
 {
-	if (en_motorSel == EN_MOTOR_IDLE)
-	{
+// 	if (en_motorSel == EN_MOTOR_IDLE)
+// 	{
 		(void) KEYPAD_read(&u8KeyRead);
 		
 		if (u8KeyRead != 'N')
@@ -138,12 +138,11 @@ void APP_vidStart(void)
 				}
 			}
 		}
-	}
+/*	}*/
 	if (en_motorSel == EN_MOTOR_START)
-	 {
-		 // global_f64Dist = HULTRASONIC_u8Read();
-		 // _delay_ms(15);
+	 { 			
 		//if (flag3 == 0) {HLCD_ClrDisplay();  flag1 = 0; flag2 = 0; flag3 = 1; }
+					
 		if (en_start_state == EN_UPDATE_DIR)
 		{
 			HLCD_ClrDisplay();
@@ -154,53 +153,98 @@ void APP_vidStart(void)
 		}
 		else if (en_start_state == UPDATE_OBISTICAL_STATE )
 		{
-			global_f64Dist = HULTRASONIC_u8Read();
-			_delay_ms(15);
-			PORTA = (uint8_t) global_f64Dist;
-			if (global_f64Dist > 70.0 )
-			{
-				en_start_state = NO_OBISTICALS;
-				PORTA = 0;
-			}
-			else if (global_f64Dist > 30.0)
-			{
-				en_start_state = OBISTICAL_70_30;
-				PORTA = 1;
-			}
-			else if (global_f64Dist >= 20.0)
-			{
-				en_start_state = OBISTICAL_30_20;
-				PORTA = 2;
-			}
-			else if (global_f64Dist < 20.0)
-			{
-				en_start_state = OBISTICAL_LESS_20;
-				PORTA = 3;
-			}
-			else{
-				// do nothing
-				PORTA = 4;
-			}
-		}
-		else{
-			// do nothing
-		}
-		if (en_start_state == OBISTICAL_70_30)
+		  global_f64Dist = HULTRASONIC_u8Read();
+		  _delay_ms(15);
+		  
+			if		(global_f64Dist > 70.0 )							{ en_Dist_states = NO_OBISTICALS;  }		
+			else if (global_f64Dist > 30.0 && global_f64Dist <= 70.0)	{ en_Dist_states = OBISTICAL_70_30; }	
+			else if (global_f64Dist >= 20.0 && global_f64Dist <= 30)	{ en_Dist_states = OBISTICAL_30_20;}	
+			else if (global_f64Dist < 20.0)								{ en_Dist_states = OBISTICAL_LESS_20;}	
+			else{  /* do nothing */ }	
+			}	else { /*do nothing*/}
+				
+		if (en_Dist_states == NO_OBISTICALS)
 		{
-			HLCD_ClrDisplay();
-			HLCD_gotoXY(0,0);
-			HLCD_WriteString( (uint8_t*) "I am here");
+				HLCD_gotoXY(1,0);
+				HLCD_WriteString("Dist: ");
+				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
+				HLCD_WriteString(" cm");
+				
+				HLCD_gotoXY(0,0);
+				HLCD_WriteString("Speed:50% ");
+				HLCD_WriteString("Dir:F");
 		}
-			
-			
-		
-		
+		else if (en_Dist_states == OBISTICAL_70_30)
+		{
+				HLCD_gotoXY(1,0);
+				HLCD_WriteString("Dist: ");
+				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
+				HLCD_WriteString(" cm");
+				
+				HLCD_gotoXY(0,0);
+				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Dir:F");		
+		}
+		else if (en_Dist_states == OBISTICAL_30_20)
+		{
+				HLCD_gotoXY(1,0);
+				HLCD_WriteString("Dist: ");
+				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
+				HLCD_WriteString(" cm");
+				
+				HLCD_gotoXY(0,0);
+				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Dir:S");
+				_delay_ms(500);
+				HLCD_gotoXY(0,0);
+				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Dir:R");
+				while (global_f64Dist <= 30.0)
+				{
+					global_f64Dist = HULTRASONIC_u8Read();
+					HLCD_gotoXY(1,0);
+					HLCD_WriteString("Dist: ");
+					HLCD_WriteInt( (Uint32_t)  global_f64Dist);
+					HLCD_WriteString(" cm");
+					if (global_f64Dist <= 20.0) break;
+				}
+				//_delay_ms(500);
+				if (global_f64Dist > 20.0)
+				{
+					HLCD_gotoXY(0,0);
+					HLCD_WriteString("Speed:30% ");
+					HLCD_WriteString("Dir:F");
+					_delay_ms(500);					
+				}
 
-		
-		
-		
+		}
+		else if (en_Dist_states == OBISTICAL_LESS_20)
+		{
+				HLCD_gotoXY(1,0);
+				HLCD_WriteString("Dist: ");
+				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
+				HLCD_WriteString(" cm");
+				
+				HLCD_gotoXY(0,0);
+				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Dir:S");
+				_delay_ms(500);
+				HLCD_gotoXY(0,0);
+				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Dir:b");
+				while (global_f64Dist <= 20.0)
+				{
+					global_f64Dist = HULTRASONIC_u8Read();
+					HLCD_gotoXY(1,0);
+					HLCD_WriteString("Dist: ");
+					HLCD_WriteInt( (Uint32_t)  global_f64Dist);
+					HLCD_WriteString(" cm");						
+				}
+		}
 	 }
-	  else if (en_motorSel == EN_MOTOR_STOP)
+	 
+	 
+	else if (en_motorSel == EN_MOTOR_STOP)
 	  {
 		  if (flag2 == 0){HLCD_ClrDisplay();  flag1 = 0; flag2 = 1; flag3 = 0; }		  
 		  HLCD_gotoXY(0,0);
@@ -212,13 +256,11 @@ void APP_vidStart(void)
 		  HLCD_gotoXY(0,0);
 		  HLCD_WriteString( (uint8_t*) "MOTOR in IDLE");  
 	  }
-	 
-
 }
 
 
 /************************************************************************************************/
-/*									Static Function Implementation                										*/
+/*									Static Function Implementation                				*/
 /************************************************************************************************/
 
 void BUTTON_vidChangeDir(void)
@@ -235,25 +277,25 @@ void TIMER1_callBackFunc(void)
 
 void APP_updateDirection(void)
 {
-	
 	HULTRASONIC_vidInterruptDisable();
 	u8_g_OneSecTicks = 0;
 	TIMER_Manager_start (&st_timer1Config);
 	HExtInt0_enIntEnable();
-	while(u8_g_OneSecTicks <= 5)
+	while(u8_g_OneSecTicks <= 2)
 	{
 		if (u8_g_dirStateCounter == 1)
 		{
 			HLCD_gotoXY(1,4);
 			HLCD_vidWriteChar(' ');
 			HLCD_gotoXY(1,0);
-			HLCD_WriteString("LEFT");
+			HLCD_WriteString("Left");
+			g_u8_motorDir = "Left";
 		}
 		else{
 			HLCD_gotoXY(1,0);
-			HLCD_WriteString("RIGHT");
+			HLCD_WriteString("Right");
+			g_u8_motorDir = "Right";
 		}
-		//PORTA = u8_g_dirStateCounter;
 	}
 	//while(u8_g_OneSecTicks <= 7);
 	HLCD_ClrDisplay();

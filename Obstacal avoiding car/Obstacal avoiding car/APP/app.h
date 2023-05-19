@@ -13,12 +13,19 @@ typedef enum
 typedef enum
 {
 	EN_UPDATE_DIR = 0,
-	UPDATE_OBISTICAL_STATE,
-	NO_OBISTICALS,
-	OBISTICAL_70_30,
-	OBISTICAL_30_20,
-	OBISTICAL_LESS_20
+	UPDATE_OBISTICAL_STATE
+
 	}en_start_states_t;
+	
+	typedef enum 
+	{
+		OBSTACLE_IDLE = 0,
+		NO_OBISTICALS ,
+		OBISTICAL_70_30,
+		OBISTICAL_30_20,
+		OBISTICAL_LESS_20
+		
+		}en_Dist_states_t;
 
 /************************************************************************************************/
 /*									Function Prototypes     									*/
