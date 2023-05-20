@@ -6,6 +6,8 @@ APP\app.c
 
 HAL\button\button.c
 
+HAL\car_control\car_control.c
+
 HAL\hextInt\HExtInt.c
 
 HAL\hlcd\hlcd_Configure.c

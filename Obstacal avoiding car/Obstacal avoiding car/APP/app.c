@@ -11,6 +11,7 @@
 #include "../HAL/timer_manager/timer_manager.h"
 #include "../HAL/Ultrasonic/ultrasonic.h"
 #include "../HAL/pwm/pwm.h"
+#include "../HAL/car_control/car_control.h"
 #include <avr/io.h>
 #include "app.h"
 #include <util/delay.h>
@@ -35,10 +36,10 @@ void APP_updateDirection(void);
 /*									Global variables											*/
 /************************************************************************************************/
 float64_t global_f64Dist;
-uint8_t u8KeyRead, flag1 = 0, flag2 = 0, flag3 = 0;
+uint8_t u8KeyRead, flag1 = 0, flag2 = 0, flag3 = 0 , flag4 = 0 , flag5 = 0;
 uint8_t u8_g_OneSecTicks = 0;
+static uint8_t u8_gs_rotate_counter = 1;
 uint8_t u8_g_dirStateCounter = MOTOR_TURN_RIGHT;
-uint8_t* g_u8_motorDir = "Right";
 en_motorSel_t en_motorSel = EN_MOTOR_IDLE;
 en_start_states_t en_start_state = EN_UPDATE_DIR;
 en_Dist_states_t en_Dist_states = OBSTACLE_IDLE;
@@ -77,23 +78,6 @@ st_timerConfigType st_timer1Config = {
 };
 
 
-/*
-// Buttons configuration structure
-const st_btnConfigType st_gc_btn_config[]={
-	{portd,pin3,Button_Start},
-	{portd,pin2,0x01}
-};
-
-// Motors configuration structure
-const ST_motor_t st_gc_motorConfig[]={
-	{
-		porta,pin3,pin4
-	},
-	{
-		porta,pin0,pin1
-	}
-};
-*/
 
 /************************************************************************************************/
 /*									Function Implementation										*/
@@ -107,13 +91,14 @@ void APP_vidInit(void)
 	(void) HExtInt_enInit(INT_0, RISE_EDGE);
 	(void) TIMER_Manager_init (&st_timer1Config);
 	(void) PWM_init();
+	(void) CAR_init();
 	
 	HULTRASONIC_vidCBF_TIM(HULTRASONIC_vidTimerCBF);
 	HULTRASONIC_vidCBF_INT(HULTRASONIC_vidSigCalc);
 	(void) HExtInt_enCBFInt0(BUTTON_vidChangeDir);
 	
 /*	sei();*/
-	DDRA = 0xFF;
+	//DDRA = 0xFF;
 }
 
 void APP_vidStart(void)
@@ -143,9 +128,7 @@ void APP_vidStart(void)
 		}
 /*	}*/
 	if (en_motorSel == EN_MOTOR_START)
-	 { 			
-		//if (flag3 == 0) {HLCD_ClrDisplay();  flag1 = 0; flag2 = 0; flag3 = 1; }
-					
+	 { 				
 		if (en_start_state == EN_UPDATE_DIR)
 		{
 			HLCD_ClrDisplay();
@@ -177,8 +160,19 @@ void APP_vidStart(void)
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:50% ");
 				HLCD_WriteString("Dir:F");
-				/* Todo: Motor move forward with duty cycle 50% */
+				/* Motor move forward with duty cycle 30% for 5 sec */
+				u8_g_OneSecTicks = 0;
+				TIMER_Manager_start (&st_timer1Config);
 				
+				while(u8_g_OneSecTicks <= 5 && flag4 == 0)
+				{
+					PWM_start(30,20,FORWARD);
+				}
+				flag4=1;
+				(void) TIMER_Manager_stop (st_timer1Config.u8_timerNum);
+				/* Motor move forward with duty cycle 50%  */
+				
+				PWM_start(50,20,FORWARD);
 				
 		}
 		else if (en_Dist_states == OBISTICAL_70_30)
@@ -191,8 +185,8 @@ void APP_vidStart(void)
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:30% ");
 				HLCD_WriteString("Dir:F");
-				/* Todo: Motor move forward with duty cycle 30% */		
-				
+				/* Motor move forward with duty cycle 30% */		
+				PWM_start(30,20,FORWARD);
 		}
 		else if (en_Dist_states == OBISTICAL_30_20)
 		{
@@ -202,18 +196,36 @@ void APP_vidStart(void)
 				HLCD_WriteString(" cm");
 				
 				HLCD_gotoXY(0,0);
-				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Speed:0% ");
 				HLCD_WriteString("Dir:S");
-				/* Todo: Motor Stop Implementation  */
-				
+				/* Motor Stop Implementation  */
+				CAR_stop();
 				_delay_ms(500);
 				HLCD_gotoXY(0,0);
-				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Speed:100% ");
 				HLCD_WriteString("Dir:R");
 				while (global_f64Dist <= 30.0)
 				{
-					/* Todo: Motor with duty cycle 30% and rotate depend on u8_g_dirStateCounter  */
-					
+					/* rotate depend on u8_g_dirStateCounter  */
+					if (u8_gs_rotate_counter <=4)
+					{
+						if (u8_g_dirStateCounter == MOTOR_TURN_LEFT)
+						{
+							CAR_reverse_left();
+						}
+						else if (u8_g_dirStateCounter == MOTOR_TURN_RIGHT)
+						{
+							CAR_reverse_right();
+						}
+						else
+						{
+							// do nothing
+						}
+						u8_gs_rotate_counter++;
+					}
+					else{
+						en_motorSel = EN_MOTOR_STOP_V2;
+					}
 					global_f64Dist = HULTRASONIC_u8Read();
 					HLCD_gotoXY(1,0);
 					HLCD_WriteString("Dist: ");
@@ -234,7 +246,7 @@ void APP_vidStart(void)
 				HLCD_WriteString("Speed:30% ");
 				HLCD_WriteString("Dir:S");
 				/* Todo: Motor Stop Implementation  */
-				
+				CAR_stop();
 				_delay_ms(500);
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:30% ");
@@ -242,7 +254,7 @@ void APP_vidStart(void)
 				while (global_f64Dist <= 20.0)
 				{
 					/* Todo: Motor move backward with duty cycle 30%  */
-					
+					PWM_start(30,20,BACKWARD);
 					global_f64Dist = HULTRASONIC_u8Read();
 					HLCD_gotoXY(1,0);
 					HLCD_WriteString("Dist: ");
@@ -258,6 +270,13 @@ void APP_vidStart(void)
 		  if (flag2 == 0){HLCD_ClrDisplay();  flag1 = 0; flag2 = 1; flag3 = 0; }		  
 		  HLCD_gotoXY(0,0);
 		  HLCD_WriteString( (uint8_t*) "Motor Stopped");   
+	  }
+	  else if (en_motorSel == EN_MOTOR_STOP_V2)
+	  {
+		  CAR_stop();
+		  _delay_ms(3000);
+		  u8_gs_rotate_counter=0;
+		  en_motorSel = EN_MOTOR_START;
 	  }
 	  else 
 	  {
@@ -312,7 +331,7 @@ void APP_updateDirection(void)
 	(void) TIMER_Manager_stop (st_timer1Config.u8_timerNum);
 	HExtInt0_enIntDisable();
 	HULTRASONIC_vidInterruptEnable();
-	//_delay_ms(2000);
+	_delay_ms(2000);
 }
 /************************************************************************************************/
 /*									END                 										*/

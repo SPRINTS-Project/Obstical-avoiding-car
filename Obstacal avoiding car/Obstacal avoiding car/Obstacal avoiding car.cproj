@@ -163,6 +163,15 @@
     <Compile Include="HAL\button\button_types.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\car_control\car_control.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\car_control\car_control.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\car_control\car_control_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\hextInt\HExtInt.c">
       <SubType>compile</SubType>
     </Compile>
@@ -203,6 +212,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\pwm\pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\pwm\pwm_CBF.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\pwm\pwm_cfg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\timer_manager\timer_manager.c">
@@ -271,11 +286,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HAL\button\" />
+    <Folder Include="HAL\car_control\" />
     <Folder Include="HAL\keypad\" />
     <Folder Include="HAL\motor\" />
     <Folder Include="HAL\hlcd" />
     <Folder Include="HAL\hextInt" />
-    <Folder Include="HAL\pwm" />
+    <Folder Include="HAL\pwm\" />
     <Folder Include="HAL\timer_manager\" />
     <Folder Include="HAL\Ultrasonic\" />
     <Folder Include="MCAL" />

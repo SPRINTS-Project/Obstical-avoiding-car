@@ -25,7 +25,7 @@
 typedef uint8_t u8_en_lcdErrorsType;
 
 #define LCD_E_OK				((u8_en_lcdErrorsType)0x00)
-#define LCD_E_NOT_OK			((u8_en_lcdErrorsType)0x05)
+#define LCD_E_NOT_OK			((u8_en_lcdErrorsType)0x08)
 /**************************************************************************************************
  * 											functions prototype
  *************************************************************************************************/

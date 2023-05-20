@@ -19,8 +19,8 @@
 
 typedef enum
 {
-	HEXTINT_NOK = 0,
-	HEXTINT_OK
+	HEXTINT_OK = 0,
+	HEXTINT_NOK = 5
 
 }enu_HExtIntError_t;
 

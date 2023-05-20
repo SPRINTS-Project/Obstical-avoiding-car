@@ -6,6 +6,7 @@ typedef enum
 {
 	EN_MOTOR_START = 0,
 	EN_MOTOR_STOP,
+	EN_MOTOR_STOP_V2,
 	EN_MOTOR_IDLE
 	
 	}en_motorSel_t;

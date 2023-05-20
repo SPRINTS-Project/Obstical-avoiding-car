@@ -20,8 +20,8 @@ typedef struct ST_motor_t
 }ST_motor_t;
 typedef enum EN_motor_error_t 
 { 
-	MOTOR_OK,
-    MOTOR_NOK
+	MOTOR_OK = 0,
+    MOTOR_NOK = 9
 }EN_motor_error_t;
 	
 #define NULL ((void*)0)	
