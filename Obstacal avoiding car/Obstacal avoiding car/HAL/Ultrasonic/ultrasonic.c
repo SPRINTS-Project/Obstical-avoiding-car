@@ -96,9 +96,10 @@ void HULTRASONIC_vidSigCalc(void)
 /*
  * Author		: Bassel Yasser Mahmoud
  * function		: HULTRASONIC_vidInit
- * description 	: func to write integer number on lcd
+ * description 	: Set Echo pin as input
  * 				  Set trig pin as output
  * 				  Initialize external interrupt
+ *				  Initialize timer2
  * Param		: void
  * return		: void
  * */
