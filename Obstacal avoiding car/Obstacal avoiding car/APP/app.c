@@ -194,6 +194,7 @@ void APP_vidStart(void)
 		else if (en_Dist_states == OBISTICAL_30_20)
 		{
 			flag4=0;
+			PWM_stop();
 				HLCD_gotoXY(1,0);
 				HLCD_WriteString("Dist: ");
 				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
@@ -281,8 +282,18 @@ void APP_vidStart(void)
 	  }
 	  else if (en_motorSel == EN_MOTOR_STOP_V2)
 	  {
+		  
+		  HLCD_ClrDisplay();
+		  HLCD_gotoXY(0,0);
+		  HLCD_WriteString( (uint8_t*) "Motor Stopped");
 		  CAR_stop();
-		  _delay_ms(3000);
+		  _delay_ms(2000);
+		  HLCD_ClrDisplay();
+		  HLCD_gotoXY(0,0);
+		  HLCD_WriteString( (uint8_t*) "Trying again in");
+		  HLCD_gotoXY(1,0);
+		  HLCD_WriteString( (uint8_t*) "1 sec");
+		  _delay_ms(1000);
 		  u8_gs_rotate_counter=0;
 		  en_motorSel = EN_MOTOR_START;
 	  }
