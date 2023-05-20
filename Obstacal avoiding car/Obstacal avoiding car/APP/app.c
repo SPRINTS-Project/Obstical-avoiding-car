@@ -15,6 +15,9 @@
 #include "app.h"
 #include <util/delay.h>
 
+
+#define MOTOR_TURN_RIGHT			0
+#define MOTOR_TURN_LEFT				1
 /************************************************************************************************/
 /*									extern functions											*/
 /************************************************************************************************/
@@ -34,7 +37,7 @@ void APP_updateDirection(void);
 float64_t global_f64Dist;
 uint8_t u8KeyRead, flag1 = 0, flag2 = 0, flag3 = 0;
 uint8_t u8_g_OneSecTicks = 0;
-uint8_t u8_g_dirStateCounter = 0;
+uint8_t u8_g_dirStateCounter = MOTOR_TURN_RIGHT;
 uint8_t* g_u8_motorDir = "Right";
 en_motorSel_t en_motorSel = EN_MOTOR_IDLE;
 en_start_states_t en_start_state = EN_UPDATE_DIR;
@@ -161,6 +164,7 @@ void APP_vidStart(void)
 			else if (global_f64Dist >= 20.0 && global_f64Dist <= 30)	{ en_Dist_states = OBISTICAL_30_20;}	
 			else if (global_f64Dist < 20.0)								{ en_Dist_states = OBISTICAL_LESS_20;}	
 			else{  /* do nothing */ }	
+				
 			}	else { /*do nothing*/}
 				
 		if (en_Dist_states == NO_OBISTICALS)
@@ -173,6 +177,9 @@ void APP_vidStart(void)
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:50% ");
 				HLCD_WriteString("Dir:F");
+				/* Todo: Motor move forward with duty cycle 50% */
+				
+				
 		}
 		else if (en_Dist_states == OBISTICAL_70_30)
 		{
@@ -183,7 +190,9 @@ void APP_vidStart(void)
 				
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:30% ");
-				HLCD_WriteString("Dir:F");		
+				HLCD_WriteString("Dir:F");
+				/* Todo: Motor move forward with duty cycle 30% */		
+				
 		}
 		else if (en_Dist_states == OBISTICAL_30_20)
 		{
@@ -195,26 +204,22 @@ void APP_vidStart(void)
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:30% ");
 				HLCD_WriteString("Dir:S");
+				/* Todo: Motor Stop Implementation  */
+				
 				_delay_ms(500);
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:30% ");
 				HLCD_WriteString("Dir:R");
 				while (global_f64Dist <= 30.0)
 				{
+					/* Todo: Motor with duty cycle 30% and rotate depend on u8_g_dirStateCounter  */
+					
 					global_f64Dist = HULTRASONIC_u8Read();
 					HLCD_gotoXY(1,0);
 					HLCD_WriteString("Dist: ");
 					HLCD_WriteInt( (Uint32_t)  global_f64Dist);
 					HLCD_WriteString(" cm");
 					if (global_f64Dist <= 20.0) break;
-				}
-				//_delay_ms(500);
-				if (global_f64Dist > 20.0)
-				{
-					HLCD_gotoXY(0,0);
-					HLCD_WriteString("Speed:30% ");
-					HLCD_WriteString("Dir:F");
-					_delay_ms(500);					
 				}
 
 		}
@@ -228,12 +233,16 @@ void APP_vidStart(void)
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:30% ");
 				HLCD_WriteString("Dir:S");
+				/* Todo: Motor Stop Implementation  */
+				
 				_delay_ms(500);
 				HLCD_gotoXY(0,0);
 				HLCD_WriteString("Speed:30% ");
 				HLCD_WriteString("Dir:b");
 				while (global_f64Dist <= 20.0)
 				{
+					/* Todo: Motor move backward with duty cycle 30%  */
+					
 					global_f64Dist = HULTRASONIC_u8Read();
 					HLCD_gotoXY(1,0);
 					HLCD_WriteString("Dist: ");
@@ -283,18 +292,19 @@ void APP_updateDirection(void)
 	HExtInt0_enIntEnable();
 	while(u8_g_OneSecTicks <= 2)
 	{
-		if (u8_g_dirStateCounter == 1)
+		if (u8_g_dirStateCounter == MOTOR_TURN_LEFT)
 		{
 			HLCD_gotoXY(1,4);
 			HLCD_vidWriteChar(' ');
 			HLCD_gotoXY(1,0);
 			HLCD_WriteString("Left");
-			g_u8_motorDir = "Left";
 		}
-		else{
+		else if(u8_g_dirStateCounter == MOTOR_TURN_RIGHT){
 			HLCD_gotoXY(1,0);
 			HLCD_WriteString("Right");
-			g_u8_motorDir = "Right";
+		}
+		else {
+			/* do nothing  */
 		}
 	}
 	//while(u8_g_OneSecTicks <= 7);
