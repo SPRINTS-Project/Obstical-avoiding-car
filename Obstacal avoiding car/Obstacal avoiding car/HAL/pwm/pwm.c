@@ -43,7 +43,6 @@ u8_pwmErrorType PWM_init(void)
 u8_pwmErrorType PWM_start(uint8_t u8_duty , uint8_t u8_cycle , en_motor_dir_t u8_motor_dir)
 {
 	
-	//_delay_ms(2000);
 	uint8_t u8_retVal = PWM_ERROR_OK;
 	if (u8_gs_pwm_state != NOT_INIT)
 	{
@@ -55,9 +54,9 @@ u8_pwmErrorType PWM_start(uint8_t u8_duty , uint8_t u8_cycle , en_motor_dir_t u8
 		u8_gs_cycle = u8_cycle;
 		u8_gs_dir = u8_motor_dir;
 		u8_duty = (u8_cycle * u8_duty) / 100;
-		//PORTB = u8_duty;
+		u8_gs_duty_counter = u8_duty;
 		u8_retVal |= TIMER_Manager_start(&st_timer0Config);
-		while (u8_gs_pwm_counter < u8_duty)
+		/*while (u8_gs_pwm_counter < u8_duty)
 		{
 			if (u8_motor_dir == FORWARD)
 			{
@@ -71,19 +70,19 @@ u8_pwmErrorType PWM_start(uint8_t u8_duty , uint8_t u8_cycle , en_motor_dir_t u8
 				// do nothing
 			}
 		}
-		while (u8_gs_pwm_counter < u8_cycle && u8_gs_pwm_counter>= u8_duty)
+		if (u8_gs_pwm_counter < u8_cycle && u8_gs_pwm_counter>= u8_duty)
 		{
 			u8_retVal |= CAR_stop();
 		}
-		u8_gs_pwm_counter = 0;
+		else{
+			u8_gs_pwm_counter = 0;
+		}
+		*/
 		u8_gs_pwm_state = START;
-		
-		//PORTB = u8_gs_pwm_counter;
 	}
 	else{
 		u8_retVal = PWM_ERROR_NOT_OK;
 	}
-	//PORTB = u8_retVal;
 	return u8_retVal;
 }
 u8_pwmErrorType PWM_stop(void)
@@ -106,5 +105,26 @@ u8_pwmErrorType PWM_stop(void)
 void TIMER0_callBackFunc(void)
 {
 	u8_gs_pwm_counter++;
+	if (u8_gs_pwm_counter < u8_gs_duty_counter)
+	{
+		if (u8_gs_dir == FORWARD)
+		{
+			CAR_forward();
+		}
+		else if (u8_gs_dir == BACKWARD)
+		{
+			CAR_backword();
+		}
+		else{
+			// do nothing
+		}
+	}
+	else if (u8_gs_pwm_counter < u8_gs_cycle && u8_gs_pwm_counter>= u8_gs_duty_counter)
+	{
+		CAR_stop();
+	}
+	else{
+		u8_gs_pwm_counter = 0;
+	}
 	TIMER_Manager_reset(&st_timer0Config);
 }
