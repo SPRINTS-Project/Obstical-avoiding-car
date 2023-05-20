@@ -31,7 +31,7 @@ typedef enum
 /*
  * Author		: Bassel Yasser Mahmoud
  * function		: HExtInt_enInit
- * description 	: func to write integer number on lcd
+ * description 	: External Interrupt Initialization
  * in[1]	 	: enExtint : Interrupt type [INT0, INT1. INT2]
  * in[2]		: snsCtrl  : Sense Control {ANY_LOGICAL, FALL_EDGE, RISE_EDGE}
  * return		: void
