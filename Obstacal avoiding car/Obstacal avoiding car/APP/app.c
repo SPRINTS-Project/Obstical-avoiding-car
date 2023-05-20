@@ -157,26 +157,29 @@ void APP_vidStart(void)
 				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
 				HLCD_WriteString(" cm");
 				
-				HLCD_gotoXY(0,0);
-				HLCD_WriteString("Speed:50% ");
-				HLCD_WriteString("Dir:F");
 				/* Motor move forward with duty cycle 30% for 5 sec */
 				u8_g_OneSecTicks = 0;
 				TIMER_Manager_start (&st_timer1Config);
 				
 				while(u8_g_OneSecTicks <= 5 && flag4 == 0)
 				{
+					HLCD_gotoXY(0,0);
+					HLCD_WriteString("Speed:30% ");
+					HLCD_WriteString("Dir:F");
 					PWM_start(30,20,FORWARD);
 				}
 				flag4=1;
 				(void) TIMER_Manager_stop (st_timer1Config.u8_timerNum);
 				/* Motor move forward with duty cycle 50%  */
-				
+				HLCD_gotoXY(0,0);
+				HLCD_WriteString("Speed:50% ");
+				HLCD_WriteString("Dir:F");
 				PWM_start(50,20,FORWARD);
 				
 		}
 		else if (en_Dist_states == OBISTICAL_70_30)
 		{
+				flag4=0;
 				HLCD_gotoXY(1,0);
 				HLCD_WriteString("Dist: ");
 				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
@@ -190,41 +193,47 @@ void APP_vidStart(void)
 		}
 		else if (en_Dist_states == OBISTICAL_30_20)
 		{
+			flag4=0;
 				HLCD_gotoXY(1,0);
 				HLCD_WriteString("Dist: ");
 				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
 				HLCD_WriteString(" cm");
 				
 				HLCD_gotoXY(0,0);
-				HLCD_WriteString("Speed:0% ");
+				HLCD_WriteString("Speed:0%");
 				HLCD_WriteString("Dir:S");
 				/* Motor Stop Implementation  */
 				CAR_stop();
 				_delay_ms(500);
 				HLCD_gotoXY(0,0);
-				HLCD_WriteString("Speed:100% ");
+				HLCD_WriteString("Speed:100%");
 				HLCD_WriteString("Dir:R");
 				while (global_f64Dist <= 30.0)
 				{
 					/* rotate depend on u8_g_dirStateCounter  */
-					if (u8_gs_rotate_counter <=4)
+					if (u8_gs_rotate_counter <= 4)
 					{
 						if (u8_g_dirStateCounter == MOTOR_TURN_LEFT)
 						{
 							CAR_reverse_left();
+							_delay_ms(1000);
+							u8_gs_rotate_counter++;
 						}
 						else if (u8_g_dirStateCounter == MOTOR_TURN_RIGHT)
 						{
 							CAR_reverse_right();
+							_delay_ms(1000);
+							u8_gs_rotate_counter++;
 						}
 						else
 						{
 							// do nothing
 						}
-						u8_gs_rotate_counter++;
+						/*u8_gs_rotate_counter++;*/
 					}
 					else{
 						en_motorSel = EN_MOTOR_STOP_V2;
+						break;
 					}
 					global_f64Dist = HULTRASONIC_u8Read();
 					HLCD_gotoXY(1,0);
@@ -237,15 +246,16 @@ void APP_vidStart(void)
 		}
 		else if (en_Dist_states == OBISTICAL_LESS_20)
 		{
+			flag4=0;
 				HLCD_gotoXY(1,0);
 				HLCD_WriteString("Dist: ");
 				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
 				HLCD_WriteString(" cm");
 				
 				HLCD_gotoXY(0,0);
-				HLCD_WriteString("Speed:30% ");
+				HLCD_WriteString("Speed:0% ");
 				HLCD_WriteString("Dir:S");
-				/* Todo: Motor Stop Implementation  */
+				/*  Motor Stop Implementation  */
 				CAR_stop();
 				_delay_ms(500);
 				HLCD_gotoXY(0,0);
@@ -253,7 +263,7 @@ void APP_vidStart(void)
 				HLCD_WriteString("Dir:b");
 				while (global_f64Dist <= 20.0)
 				{
-					/* Todo: Motor move backward with duty cycle 30%  */
+					/* Motor move backward with duty cycle 30%  */
 					PWM_start(30,20,BACKWARD);
 					global_f64Dist = HULTRASONIC_u8Read();
 					HLCD_gotoXY(1,0);
@@ -262,9 +272,7 @@ void APP_vidStart(void)
 					HLCD_WriteString(" cm");						
 				}
 		}
-	 }
-	 
-	 
+	 } 
 	else if (en_motorSel == EN_MOTOR_STOP)
 	  {
 		  if (flag2 == 0){HLCD_ClrDisplay();  flag1 = 0; flag2 = 1; flag3 = 0; }		  

@@ -285,6 +285,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Debug\" />
+    <Folder Include="Debug\APP\" />
+    <Folder Include="Debug\HAL\" />
+    <Folder Include="Debug\HAL\button\" />
+    <Folder Include="Debug\HAL\hextInt\" />
+    <Folder Include="Debug\HAL\HLCD\" />
+    <Folder Include="Debug\HAL\keypad\" />
+    <Folder Include="Debug\HAL\lcd\" />
+    <Folder Include="Debug\HAL\motor\" />
+    <Folder Include="Debug\HAL\pwm\" />
+    <Folder Include="Debug\HAL\timer_manager\" />
+    <Folder Include="Debug\HAL\Ultrasonic\" />
+    <Folder Include="Debug\MCAL\" />
+    <Folder Include="Debug\MCAL\dio\" />
+    <Folder Include="Debug\MCAL\DIO_V2\" />
+    <Folder Include="Debug\MCAL\ExtInt\" />
+    <Folder Include="Debug\MCAL\GPT2\" />
+    <Folder Include="Debug\MCAL\timer\" />
+    <Folder Include="Debug\STD_LIBRARIES\" />
     <Folder Include="HAL\button\" />
     <Folder Include="HAL\car_control\" />
     <Folder Include="HAL\keypad\" />
@@ -301,6 +320,128 @@
     <Folder Include="MCAL\ExtInt\" />
     <Folder Include="MCAL\timer\" />
     <Folder Include="STD_LIBRARIES\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Debug\APP\app.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\APP\app.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\button\button.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\button\button.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\hextInt\HExtInt.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\hextInt\HExtInt.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\HLCD\hlcd_Configure.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\HLCD\hlcd_Configure.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\HLCD\hlcd_Source.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\HLCD\hlcd_Source.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\keypad\keypad and LCD intergration.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\keypad\keypad and LCD intergration.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\keypad\keypad.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\keypad\keypad.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\motor\motor.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\motor\motor.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\pwm\pwm.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\pwm\pwm.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\timer_manager\timer_manager.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\timer_manager\timer_manager.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\Ultrasonic\ultrasonic.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\Ultrasonic\ultrasonic.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\Ultrasonic\ultrasonic_cfg.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\HAL\Ultrasonic\ultrasonic_cfg.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\main.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\main.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\makedep.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Makefile">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\MCAL\dio\dio.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\MCAL\dio\dio.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\MCAL\ExtInt\EXTINT_Source.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\MCAL\ExtInt\EXTINT_Source.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\MCAL\timer\timer.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\MCAL\timer\timer.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Obstacal avoiding car.eep">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Obstacal avoiding car.elf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Obstacal avoiding car.hex">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Obstacal avoiding car.lss">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Obstacal avoiding car.map">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Obstacal avoiding car.srec">
+      <SubType>compile</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

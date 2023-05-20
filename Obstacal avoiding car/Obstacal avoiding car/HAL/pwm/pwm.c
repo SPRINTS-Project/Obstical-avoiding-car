@@ -39,7 +39,7 @@ u8_pwmErrorType PWM_init(void)
 u8_pwmErrorType PWM_start(uint8_t u8_duty , uint8_t u8_cycle , en_motor_dir_t u8_motor_dir)
 {
 	uint8_t u8_retVal = PWM_ERROR_OK;
-	if (u8_gs_pwm_state == INIT)
+	if (u8_gs_pwm_state != NOT_INIT)
 	{
 		if (u8_gs_pwm_state == START &&  (u8_gs_duty != u8_duty || u8_gs_cycle != u8_cycle || u8_gs_dir != u8_motor_dir ))
 		{
@@ -47,7 +47,7 @@ u8_pwmErrorType PWM_start(uint8_t u8_duty , uint8_t u8_cycle , en_motor_dir_t u8
 		}
 		u8_duty = (u8_cycle * u8_duty) / 100;
 		u8_retVal |= TIMER_Manager_start(&st_timer0Config);
-		if (u8_gs_pwm_counter < u8_cycle)
+		if (u8_gs_pwm_counter < u8_duty)
 		{
 			if (u8_motor_dir == FORWARD)
 			{

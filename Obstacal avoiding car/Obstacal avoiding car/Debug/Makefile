@@ -33,6 +33,25 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
+../Debug/ \
+../Debug/APP/ \
+../Debug/HAL/ \
+../Debug/HAL/button/ \
+../Debug/HAL/hextInt/ \
+../Debug/HAL/HLCD/ \
+../Debug/HAL/keypad/ \
+../Debug/HAL/lcd/ \
+../Debug/HAL/motor/ \
+../Debug/HAL/pwm/ \
+../Debug/HAL/timer_manager/ \
+../Debug/HAL/Ultrasonic/ \
+../Debug/MCAL/ \
+../Debug/MCAL/dio/ \
+../Debug/MCAL/DIO_V2/ \
+../Debug/MCAL/ExtInt/ \
+../Debug/MCAL/GPT2/ \
+../Debug/MCAL/timer/ \
+../Debug/STD_LIBRARIES/ \
 ../HAL/button/ \
 ../HAL/car_control/ \
 ../HAL/keypad/ \
