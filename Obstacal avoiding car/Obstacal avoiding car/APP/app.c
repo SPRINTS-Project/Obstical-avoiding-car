@@ -152,6 +152,10 @@ void APP_vidStart(void)
 				
 		if (en_Dist_states == NO_OBISTICALS)
 		{
+			if(global_f64Dist>99.0)
+			{
+				global_f64Dist = 99.0;
+			}
 				HLCD_gotoXY(1,0);
 				HLCD_WriteString("Dist: ");
 				HLCD_WriteInt( (Uint32_t)  global_f64Dist);
@@ -350,7 +354,12 @@ void APP_updateDirection(void)
 	(void) TIMER_Manager_stop (st_timer1Config.u8_timerNum);
 	HExtInt0_enIntDisable();
 	HULTRASONIC_vidInterruptEnable();
+	HLCD_gotoXY(0,0);
+	HLCD_WriteString("Motor starts in");
+	HLCD_gotoXY(1,0);
+	HLCD_WriteString("2 Sec.");
 	_delay_ms(2000);
+	HLCD_ClrDisplay();
 }
 /************************************************************************************************/
 /*									END                 										*/
